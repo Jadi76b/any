@@ -29,7 +29,7 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "hokm-db",
+      "database_name": "data",
       "database_id": "c985614c-d613-4dc3-a8a5-935ad85e35f9"
     }
   ],
