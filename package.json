@@ -1,0 +1,22 @@
+{
+  "name": "hokm-game",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "worker.js",
+  "scripts": {
+    "dev": "wrangler dev worker.js --ip 0.0.0.0 --port 3000",
+    "dev:local": "wrangler dev worker.js --local --ip 0.0.0.0 --port 3000",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail",
+    "db:create": "wrangler d1 create hokm-db",
+    "db:init:local": "wrangler d1 execute hokm-db --local --command \"SELECT 1\"",
+    "db:console:local": "wrangler d1 execute hokm-db --local",
+    "db:console:prod": "wrangler d1 execute hokm-db --remote",
+    "test:rules": "node test/rules.test.mjs",
+    "clean-port": "fuser -k 3000/tcp 2>/dev/null || true"
+  },
+  "devDependencies": {
+    "wrangler": "^4.110.0"
+  }
+}

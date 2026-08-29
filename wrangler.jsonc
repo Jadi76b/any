@@ -1,0 +1,52 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "hokm-game",
+  "main": "worker.js",
+  "compatibility_date": "2024-11-01",
+  "compatibility_flags": ["nodejs_compat"],
+
+  "observability": { "enabled": true },
+
+  // ------------------------------------------------------------------
+  // Durable Objects — live game state + WebSockets
+  // ------------------------------------------------------------------
+  "durable_objects": {
+    "bindings": [
+      { "name": "GAME_ROOM", "class_name": "GameRoom" }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["GameRoom"]
+    }
+  ],
+
+  // ------------------------------------------------------------------
+  // D1 — users / rooms / games / rounds / stats
+  // Run:  npx wrangler d1 create hokm-db     then paste database_id below
+  // ------------------------------------------------------------------
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "hokm-db",
+      "database_id": "PASTE_YOUR_D1_DATABASE_ID_HERE"
+    }
+  ],
+
+  // ------------------------------------------------------------------
+  // Non-secret variables (secrets go to `wrangler secret put`)
+  // ------------------------------------------------------------------
+  "vars": {
+    "AI_BASE_URL": "https://api.openai.com/v1",
+    "AI_MODEL": "gpt-4o-mini",
+    "AI_ENABLED": "true",
+    "AI_TIMEOUT_MS": "6000",
+    "BOT_DELAY_MS": "1100",
+    "ALLOW_GUEST": "true",
+    "INITDATA_MAX_AGE": "86400",
+    "TELEGRAM_BOT_USERNAME": "",
+    "TELEGRAM_MINIAPP_NAME": "",
+    "PUBLIC_URL": ""
+  }
+}
